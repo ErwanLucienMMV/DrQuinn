@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-PROGRAMS = Colleen
+PROGRAMS = Colleen Grace
 OBJECTS = $(PROGRAMS:=.o)
 
 .DEFAULT_GOAL := all
@@ -18,7 +18,7 @@ $(PROGRAMS): %: %.o
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJECTS) Grace_kid.c
 
 fclean: clean
 	$(RM) $(PROGRAMS)
