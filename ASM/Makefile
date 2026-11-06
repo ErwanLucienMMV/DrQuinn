@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 NASM = nasm
 ASFLAGS = -f elf64
 
-PROGRAMS = Colleen Grace
+PROGRAMS = Colleen Grace Sully
 OBJECTS = $(PROGRAMS:=.o)
 
 .DEFAULT_GOAL := all
@@ -20,10 +20,10 @@ $(PROGRAMS): %: %.o
 	$(NASM) $(ASFLAGS) $< -o $@
 
 clean:
-	$(RM) $(OBJECTS) Grace_kid.s
+	$(RM) $(OBJECTS) Grace_kid.s Sully_*.s Sully_*.o
 
 fclean: clean
-	$(RM) $(PROGRAMS)
+	$(RM) $(PROGRAMS) Sully_[0-9]*
 
 re:
 	$(MAKE) fclean

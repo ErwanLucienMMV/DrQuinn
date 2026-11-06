@@ -13,6 +13,7 @@ representation, without reading a source file or using `argc` / `argv`.
 | --- | --- |
 | **Colleen** | Prints its own source to standard output. |
 | **Grace** | Writes its own source into `Grace_kid.c` or `Grace_kid.s`. |
+| **Sully** | Generates, compiles, and runs decreasing copies of itself. |
 
 ## Requirements
 
@@ -87,6 +88,35 @@ diff Grace.s Grace_kid.s
 
 An empty `diff` output indicates identical files.
 
+### Sully
+
+The counter starts at `5`. The original creates and runs `Sully_5`, then
+each descendant decrements the counter before producing the next source.
+`Sully_0` runs and stops without creating a negative generation. A negative
+initial counter produces no descendants.
+
+```sh
+cd C
+./Sully
+diff Sully.c Sully_0.c
+diff Sully_3.c Sully_2.c
+```
+
+```sh
+cd ASM
+./Sully
+diff Sully.s Sully_0.s
+diff Sully_3.s Sully_2.s
+```
+
+The only source difference is the counter declaration. Each language
+produces six sources and six executables, numbered `5` through `0`.
+Assembly additionally produces six object files.
+
+Sully requires `cc` in `PATH` at runtime; the assembly version also needs
+`nasm`. Compiler or descendant execution failures propagate a nonzero
+exit status.
+
 ## Implementation
 
 The format string describes the program around a placeholder for its own
@@ -97,7 +127,8 @@ Assembly sources use NASM's ELF64 format and the System V AMD64 calling
 convention. Relative addressing and PLT calls support Fedora's default
 PIE linking. The GNU stack note marks the stack as non-executable.
 
-Output, file writes, and file closing are checked. Errors return a nonzero
+Output, file writes, file closing, and compiler execution are checked.
+Errors return a nonzero
 exit status. All source files must retain LF line endings for exact
 reproduction.
 
