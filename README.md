@@ -130,11 +130,16 @@ make -C Python
 cd Python
 python3 Colleen.py > /tmp/Colleen.py
 diff Colleen.py /tmp/Colleen.py
+python3 Grace.py
+diff Grace.py Grace_kid.py
 ```
 
 The Makefile provides `all`, `clean`, `fclean`, and `re`. It compiles the
 original scripts into sibling `.pyc` files, which can also be run directly
 with Python 3. These are incremental builds; source files are kept intact.
+
+Python has no preprocessor macros. Grace uses three constants, one comment,
+and a called function to reproduce the original macro-driven behavior.
 
 ## Implementation
 
