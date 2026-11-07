@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-PROGRAMS = Colleen Grace
+PROGRAMS = Colleen Grace Sully
 BYTECODE = $(PROGRAMS:=.pyc)
 
 .DEFAULT_GOAL := all
@@ -15,7 +15,7 @@ $(PROGRAMS): %: %.pyc
 	$(PYTHON) -c "import py_compile; py_compile.compile('$<', cfile='$@', doraise=True)"
 
 clean:
-	$(RM) $(BYTECODE) Grace_kid.py Grace_kid.pyc
+	$(RM) $(BYTECODE) Grace_kid.py Grace_kid.pyc Sully_*.py Sully_*.pyc
 
 fclean: clean
 

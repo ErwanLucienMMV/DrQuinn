@@ -132,6 +132,9 @@ python3 Colleen.py > /tmp/Colleen.py
 diff Colleen.py /tmp/Colleen.py
 python3 Grace.py
 diff Grace.py Grace_kid.py
+python3 Sully.py
+diff Sully.py Sully_0.py
+diff Sully_3.py Sully_2.py
 ```
 
 The Makefile provides `all`, `clean`, `fclean`, and `re`. It compiles the
@@ -140,6 +143,11 @@ with Python 3. These are incremental builds; source files are kept intact.
 
 Python has no preprocessor macros. Grace uses three constants, one comment,
 and a called function to reproduce the original macro-driven behavior.
+
+Sully writes `Sully_5.py` through `Sully_0.py`. Each generated source is
+compiled with `py_compile` into `Sully_N.pyc`, then executed with the same
+Python interpreter. Only the counter declaration changes between sources.
+The zero generation stops without producing a negative generation.
 
 ## Implementation
 
