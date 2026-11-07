@@ -4,8 +4,9 @@
 
 An introduction to self-reproducing programs and Kleene's recursion
 theorem. The project consists of three programs implemented in C and
-x86-64 assembly. Each program reproduces its source using an embedded
-representation, without reading a source file or using `argc` / `argv`.
+x86-64 assembly, with a Python 3 implementation for the bonus. Each
+program reproduces its source using an embedded representation, without
+reading a source file or using `argc` / `argv`.
 
 ## Programs
 
@@ -20,11 +21,12 @@ representation, without reading a source file or using `argc` / `argv`.
 - Linux x86-64; tested on Fedora 44.
 - A C compiler, GNU Make, and NASM.
 - The standard C library.
+- Python 3 for the bonus; no third-party packages are required.
 
 On Fedora:
 
 ```sh
-sudo dnf install gcc make nasm
+sudo dnf install gcc make nasm python3
 ```
 
 ## Build
@@ -116,6 +118,23 @@ Assembly additionally produces six object files.
 Sully requires `cc` in `PATH` at runtime; the assembly version also needs
 `nasm`. Compiler or descendant execution failures propagate a nonzero
 exit status.
+
+## Python bonus
+
+The `Python/` directory contains native Python quines. Source templates
+use Python's `repr` and string interpolation; no C or assembly code is
+called. Python 3 and its standard library are sufficient.
+
+```sh
+make -C Python
+cd Python
+python3 Colleen.py > /tmp/Colleen.py
+diff Colleen.py /tmp/Colleen.py
+```
+
+The Makefile provides `all`, `clean`, `fclean`, and `re`. It compiles the
+original scripts into sibling `.pyc` files, which can also be run directly
+with Python 3. These are incremental builds; source files are kept intact.
 
 ## Implementation
 
